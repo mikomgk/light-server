@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 const port = process.env.PORT || 3000
-const ifttUrl = 'https://maker.ifttt.com/trigger/lightsOn/with/key/cTIW3rbhvRL3ZImLSfrg1x'
+const ifttUrl = 'https://maker.ifttt.com/trigger/lights_on/with/key/cTIW3rbhvRL3ZImLSfrg1x'
 let counter = 0
 const maxCounter = 2
 const minCounter = 0
