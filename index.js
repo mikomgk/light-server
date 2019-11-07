@@ -13,7 +13,7 @@ const ifttUrl = 'https://maker.ifttt.com/trigger/lights_on/with/key/cTIW3rbhvRL3
 let counter = 0
 const maxCounter = 2
 const minCounter = 0
-let stopTime = Date.now()
+let stopTime = 0
 
 app.get('/', (req, res) => {
     res.send(`${counter}`)
@@ -29,7 +29,7 @@ app.get('/set', (req, res) => {
 })
 
 app.get('/plus', (req, res) => {
-    if (counter++ == 0 && isTimeOkForLights()) {
+    if (counter++ === 0 && isTimeOkForLights()) {
         console.log(`will do lights`)
         switchLights()
     }
