@@ -2,11 +2,26 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const helmet = require('helmet')
+const bcrypt = require('bcrypt')
+
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config({path: '.env'})
+}
 
 const app = express()
 app.use(helmet())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+app.use((req, res, next) => {
+    const key = req.query.key || ''
+    const hash = process.env.MY_HASH_KEY
+    if (bcrypt.compareSync(key, hash)) {
+        next()
+    } else {
+        console.log(`Got wrong key: ${key}`)
+        res.status(401).send()
+    }
+})
 
 const port = process.env.PORT || 3000
 const ifttUrl = 'https://maker.ifttt.com/trigger/lights_on/with/key/cTIW3rbhvRL3ZImLSfrg1x'
