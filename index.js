@@ -11,7 +11,7 @@ app.use(helmet())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use((req, res, next) => {
-    const key = req.query.key || ''
+    const key = req.body.key || ''
     const hash = process.env.MY_HASH_KEY
     if (bcrypt.compareSync(key, hash)) {
         next()
@@ -28,12 +28,12 @@ const maxCounter = 2
 const minCounter = 0
 let stopTime = 0
 
-app.get('/get', (req, res) => {
+app.post('/get', (req, res) => {
     res.send(`${counter}`)
 })
 
-app.get('/set', (req, res) => {
-    let c = req.query.counter
+app.post('/set', (req, res) => {
+    let c = req.body.counter
     if (c && parseInt(c)) {
         counter = c
         checkCounter()
@@ -41,7 +41,7 @@ app.get('/set', (req, res) => {
     res.send(`counter set to ${counter}`)
 })
 
-app.get('/plus', (req, res) => {
+app.post('/plus', (req, res) => {
     if (counter++ === 0 && isTimeOkForLights()) {
         console.log(`will do lights`)
         switchLights()
@@ -50,13 +50,13 @@ app.get('/plus', (req, res) => {
     res.send(`counter set to ${counter}`)
 });
 
-app.get('/minus', (req, res) => {
+app.post('/minus', (req, res) => {
     counter--
     checkCounter()
     res.send(`counter set to ${counter}`)
 });
 
-app.get('/stop', (req, res) => {
+app.post('/stop', (req, res) => {
     stopTime = Date.now()
     res.send(`updated stop time to ${stopTime}`)
 });
