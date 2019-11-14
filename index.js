@@ -4,9 +4,7 @@ const request = require('request')
 const helmet = require('helmet')
 const bcrypt = require('bcrypt')
 
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config({path: '.env'})
-}
+require('dotenv').config({path: '.env'})
 
 const app = express()
 app.use(helmet())
