@@ -13,7 +13,6 @@ app.use(bodyParser.json())
 app.use((req, res, next) => {
     const key = req.query.key || ''
     const hash = process.env.MY_HASH_KEY
-    console.log(hash)
     if (bcrypt.compareSync(key, hash)) {
         next()
     } else {
