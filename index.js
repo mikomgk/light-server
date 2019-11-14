@@ -30,7 +30,7 @@ const maxCounter = 2
 const minCounter = 0
 let stopTime = 0
 
-app.get('/', (req, res) => {
+app.get('/get', (req, res) => {
     res.send(`${counter}`)
 })
 
