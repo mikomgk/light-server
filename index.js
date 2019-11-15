@@ -13,7 +13,6 @@ app.use(bodyParser.json())
 app.use((req, res, next) => {
     const key = req.body.key || ''
     const hash = process.env.MY_HASH_KEY
-    console.log({hash, key})
     if (bcrypt.compareSync(key, hash)) {
         next()
     } else {
@@ -28,6 +27,19 @@ let counter = 0
 const maxCounter = 2
 const minCounter = 0
 let stopTime = 0
+
+app.get('/isup', (req, res) => {
+    res.json({isUp: true})
+})
+app.get('/', (req, res) => {
+    res.send(
+        `<body style="background-color: rgb(32, 33, 36)">
+            <h1 style="text-align: center;color: rgb(154, 160, 166)">
+                MIKOs.CLUB
+            </h1>
+        </body>`
+    )
+})
 
 app.post('/get', (req, res) => {
     res.send(`${counter}`)
