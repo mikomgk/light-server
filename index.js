@@ -11,7 +11,7 @@ app.use(helmet())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use((req, res, next) => {
-    const key = req.body.key || ''
+    const key = req.body.key || req.query.key || ''
     const hash = process.env.MY_HASH_KEY
     if (bcrypt.compareSync(key, hash)) {
         next()
