@@ -13,7 +13,7 @@ app.use(bodyParser.json())
 app.use((req, res, next) => {
     const key = req.body.key || req.query.key || ''
     const hash = process.env.MY_HASH_KEY
-    if (bcrypt.compareSync(key, hash) || req.route.path === '/') {
+    if (bcrypt.compareSync(key, hash) || req.path === '/') {
         next()
     } else {
         console.log(`Got wrong key: ${key}`)
