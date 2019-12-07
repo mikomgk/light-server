@@ -21,7 +21,7 @@ app.use((req, res, next) => {
     }
 })
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 const ifttUrl = 'https://maker.ifttt.com/trigger/lights_on/with/key/cTIW3rbhvRL3ZImLSfrg1x'
 let counter = 0
 const maxCounter = 2
